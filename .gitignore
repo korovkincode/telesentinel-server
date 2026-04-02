@@ -1,0 +1,24 @@
+# Python / Poetry
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+
+# ENV
+.env
+
+# Alembic / Migrations
+migrations/versions/*.pyc
+
+# IDE / Editor
+.vscode/
+
+# Cache
+.pytest_cache/
+.ruff_cache/
+
+# Logs
+*.log

@@ -1,0 +1,33 @@
+[project]
+name = "telesentinel-server"
+version = "0.1.0"
+description = "TeleSentinel is a backend service for monitoring Telegram chats, analyzing messages using LLMs, and collecting users based on semantic filters."
+authors = [
+    {name = "Nick",email = "nickorovkinwork@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi (>=0.135.3,<0.136.0)",
+    "uvicorn (>=0.42.0,<0.43.0)",
+    "sqlalchemy (>=2.0.48,<3.0.0)",
+    "asyncpg (>=0.31.0,<0.32.0)",
+    "pydantic (>=2.12.5,<3.0.0)",
+    "celery (>=5.6.3,<6.0.0)",
+    "python-jose (>=3.5.0,<4.0.0)",
+    "passlib[bcrypt] (>=1.7.4,<2.0.0)",
+    "httpx (>=0.28.1,<0.29.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.2"
+ruff = "^0.15.9"
+
+[tool.poetry]
+package-mode = false
