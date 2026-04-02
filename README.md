@@ -52,8 +52,8 @@ app/
       jobs/        # Celery Tasks (run_task.py, scheduler.py)
    utils/          # helpers
 
-migrations/       # Alembic
-docker/           # Docker configs
+migrations/        # Alembic
+docker/            # Docker configs
 
 ```
 
