@@ -44,6 +44,7 @@ TeleSentinel-Server is a backend service for monitoring Telegram chats, analyzin
 app/
    api/            # FastAPI routers
    core/           # config, settings, security
+   execution/      # execution logic
    models/         # SQLAlchemy models
    repositories/   # DB access layer
    schemas/        # Pydantic
@@ -73,12 +74,17 @@ cd telesentinel
 Create `.env` file:
 
 ```env
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/telesentinel
+SUPERUSER_LOGIN=superuser_login
+SUPERUSER_PASSWORD=superuser_password
 
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/telesentinel
 RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672//
 
 JWT_ALGORITHM=HS256
 SECRET_KEY=your_secret
+
+ACCESS_TOKEN_EXPIRES_MINUTES=60
+REFRESH_TOKEN_EXPIRES_DAYS=7
 
 OPENAI_API_KEY=your_key
 ```
