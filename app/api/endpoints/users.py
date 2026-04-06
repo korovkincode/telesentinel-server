@@ -1,12 +1,10 @@
 from fastapi import APIRouter, Depends
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_session, require_superuser
 from app.repositories.users import UserRepository
-from app.services.users import UserService
 from app.schemas.users import UserCreate, UserResponse
-
+from app.services.users import UserService
 
 router = APIRouter(prefix="/users", tags=["users"])
 

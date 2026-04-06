@@ -2,9 +2,9 @@ import secrets
 import string
 
 from app.core.security import hash_password
-from app.repositories.users import UserRepository
-from app.models.user import User
 from app.exc.base import UserNotFoundError
+from app.models.user import User
+from app.repositories.users import UserRepository
 
 RANDOM_PASSWORD_LENGTH = 12
 

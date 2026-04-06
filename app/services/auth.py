@@ -1,17 +1,17 @@
 from app.core.security import (
-    verify_password,
     create_access_token,
     create_refresh_token,
     decode_token,
+    verify_password,
 )
-from app.repositories.users import UserRepository
-from app.models.user import User
 from app.exc.base import (
-    UserNotFoundError,
-    UserInactiveError,
     InvalidCredentialsError,
     InvalidTokenError,
+    UserInactiveError,
+    UserNotFoundError,
 )
+from app.models.user import User
+from app.repositories.users import UserRepository
 
 
 class AuthService:

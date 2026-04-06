@@ -1,19 +1,18 @@
 from typing import AsyncGenerator
 
 from fastapi import Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-
+from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.core.db import AsyncSessionLocal
 from app.core.security import decode_token
-from app.repositories.users import UserRepository
 from app.exc.base import (
     InvalidTokenTypeError,
-    UserNotFoundError,
-    UserInactiveError,
     NotEnoughPermissionsError,
+    UserInactiveError,
+    UserNotFoundError,
 )
+from app.repositories.users import UserRepository
 
 security = HTTPBearer()
 
