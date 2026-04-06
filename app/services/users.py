@@ -4,6 +4,7 @@ import string
 from app.core.security import hash_password
 from app.repositories.users import UserRepository
 from app.models.user import User
+from app.exc.base import UserNotFoundError
 
 RANDOM_PASSWORD_LENGTH = 12
 
@@ -25,7 +26,7 @@ class UserService:
     async def reset_password(self, user_id: int) -> str:
         user = await self.user_repo.get_by_id(user_id)
         if not user:
-            raise ValueError("User not found")
+            raise UserNotFoundError()
 
         new_password = self._generate_password()
         password_hash = hash_password(new_password)

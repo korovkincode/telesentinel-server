@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -18,11 +18,7 @@ async def login(
 ):
     service = AuthService(UserRepository(session))
 
-    tokens = await service.login(data.login, data.password)
-    if not tokens:
-        raise HTTPException(status_code=401, detail="Invalid credentials")
-
-    return tokens
+    return await service.login(data.login, data.password)
 
 
 @router.post("/refresh", response_model=TokenResponse)
@@ -32,7 +28,4 @@ async def refresh(
 ):
     service = AuthService(UserRepository(session))
 
-    try:
-        return await service.refresh_access_token(data.refresh_token)
-    except ValueError:
-        raise HTTPException(status_code=401, detail="Invalid refresh token")
+    return await service.refresh_access_token(data.refresh_token)

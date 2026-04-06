@@ -5,7 +5,7 @@ from jose import jwt, JWTError
 from passlib.context import CryptContext
 
 from app.core.config import settings
-
+from app.exc.base import InvalidTokenError
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -52,4 +52,4 @@ def decode_token(token: str) -> dict[str, Any]:
         )
         return payload
     except JWTError:
-        raise ValueError("Invalid token")
+        raise InvalidTokenError()

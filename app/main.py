@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from app.core.db import AsyncSessionLocal
 from app.core.init_superuser import init_superuser
 from app.api.router import router
+import app.api.exc_handler as app_exc_handler
 
 
 @asynccontextmanager
@@ -16,3 +17,4 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan, title="TeleSentinel-Server")
 app.include_router(router, prefix="/api")
+app_exc_handler.register_exc_handlers(app)

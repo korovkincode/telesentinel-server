@@ -44,6 +44,7 @@ TeleSentinel-Server is a backend service for monitoring Telegram chats, analyzin
 app/
    api/            # FastAPI routers
    core/           # config, settings, security
+   exc/            # app exceptions
    execution/      # execution logic
    models/         # SQLAlchemy models
    repositories/   # DB access layer

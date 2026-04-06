@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -19,13 +19,11 @@ async def create_user(
 ):
     service = UserService(UserRepository(session))
 
-    user = await service.create_user(
+    return await service.create_user(
         login=data.login,
         password=data.password,
         is_superuser=data.is_superuser,
     )
-
-    return user
 
 
 @router.post("/{user_id}/reset-password")
@@ -36,9 +34,6 @@ async def reset_password(
 ):
     service = UserService(UserRepository(session))
 
-    try:
-        new_password = await service.reset_password(user_id)
-    except ValueError:
-        raise HTTPException(status_code=404, detail="User not found")
+    new_password = await service.reset_password(user_id)
 
     return {"new_password": new_password}
