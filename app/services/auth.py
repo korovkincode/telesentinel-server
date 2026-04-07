@@ -18,7 +18,7 @@ class AuthService:
     def __init__(self, user_repo: UserRepository):
         self.user_repo = user_repo
 
-    async def authenticate_user(self, login: str, password: str) -> User | None:
+    async def authenticate_user(self, login: str, password: str) -> User:
         user = await self.user_repo.get_by_login(login)
 
         if not user:
@@ -31,7 +31,7 @@ class AuthService:
 
         return user
 
-    async def login(self, login: str, password: str) -> dict[str, str] | None:
+    async def login(self, login: str, password: str) -> dict[str, str]:
         user = await self.authenticate_user(login, password)
 
         return {

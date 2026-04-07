@@ -42,3 +42,9 @@ class NotEnoughPermissionsError(AppError):
     code = "not_enough_permissions"
     status_code = 403
     message = "Not enough permissions"
+
+
+class RefreshTokenNotProvidedError(AppError):
+    code = "refresh_token_not_provided"
+    status_code = 400
+    message = "Refresh token is not provided"

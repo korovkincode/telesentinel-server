@@ -75,6 +75,8 @@ cd telesentinel
 Create `.env` file:
 
 ```env
+IS_PROD=0
+
 SUPERUSER_LOGIN=superuser_login
 SUPERUSER_PASSWORD=superuser_password
 
@@ -86,6 +88,7 @@ SECRET_KEY=your_secret
 
 ACCESS_TOKEN_EXPIRES_MINUTES=60
 REFRESH_TOKEN_EXPIRES_DAYS=7
+REFRESH_TOKEN_COOKIE_NAME=your_cookie_name
 
 OPENAI_API_KEY=your_key
 ```

@@ -1,14 +1,16 @@
 from typing import AsyncGenerator
 
-from fastapi import Depends
+from fastapi import Depends, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import settings
 from app.core.db import AsyncSessionLocal
 from app.core.security import decode_token
 from app.exc.base import (
     InvalidTokenTypeError,
     NotEnoughPermissionsError,
+    RefreshTokenNotProvidedError,
     UserInactiveError,
     UserNotFoundError,
 )
@@ -53,3 +55,12 @@ async def require_superuser(user=Depends(get_current_user)):
     if not user.is_superuser:
         raise NotEnoughPermissionsError()
     return user
+
+
+def get_refresh_token(request: Request) -> str:
+    token = request.cookies.get(settings.REFRESH_TOKEN_COOKIE_NAME)
+
+    if not token:
+        raise RefreshTokenNotProvidedError()
+
+    return token
