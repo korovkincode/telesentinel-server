@@ -15,6 +15,9 @@ fix:
 test:
 	poetry run pytest -v
 
+run-server:
+	poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
 
 # ---------- Docker Tasks ----------
 build:
