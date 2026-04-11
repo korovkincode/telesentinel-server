@@ -47,6 +47,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-buildx-
 
+      - name: Create .env file
+        run: |
+          touch .env
+          
+          echo IS_PROD=${{ secrets.IS_PROD }} >> .env
+          
+          echo SUPERUSER_LOGIN=${{ secrets.SUPERUSER_LOGIN }} >> .env
+          echo SUPERUSER_PASSWORD=${{ secrets.SUPERUSER_PASSWORD }} >> .env
+          
+          echo DB_USER=${{ secrets.DB_USER }} >> .env
+          echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
+          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
+          
+          echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
+          echo JWT_ALGORITHM=${{ secrets.JWT_ALGORITHM }} >> .env
+          
+          echo ACCESS_TOKEN_EXPIRES_MINUTES=${{ secrets.ACCESS_TOKEN_EXPIRES_MINUTES }} >> .env
+          echo REFRESH_TOKEN_EXPIRES_DAYS=${{ secrets.REFRESH_TOKEN_EXPIRES_DAYS }} >> .env
+          echo REFRESH_TOKEN_COOKIE_NAME=${{ secrets.REFRESH_TOKEN_COOKIE_NAME }} >> .env
+          
+          echo OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }} >> .env
+
       - name: Build and run tests
         run: |
           docker compose -f docker-compose.yml build
