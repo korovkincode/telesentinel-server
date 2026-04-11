@@ -20,6 +20,7 @@ FROM base AS development
 COPY --from=builder /app/.venv /app/.venv
 COPY . .
 
+RUN chmod +x docker/entrypoint.sh
 ENTRYPOINT ["docker/entrypoint.sh"]
 
 # Stage 4: Production
@@ -30,4 +31,5 @@ USER appuser
 COPY --from=builder /app/.venv /app/.venv 
 COPY . .
 
+RUN chmod +x docker/entrypoint.sh
 ENTRYPOINT ["docker/entrypoint.sh"]
