@@ -80,8 +80,9 @@ IS_PROD=0
 SUPERUSER_LOGIN=superuser_login
 SUPERUSER_PASSWORD=superuser_password
 
-DATABASE_URL=postgresql+asyncpg://postgres:postgres@db:5432/telesentinel
-RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672//
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_NAME=telesentinel
 
 JWT_ALGORITHM=HS256
 SECRET_KEY=your_secret

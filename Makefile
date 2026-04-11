@@ -1,7 +1,9 @@
-.PHONY: lint format fix test build up down logs
+.PHONY: lint format fix test build up down logs shell migration
 
+DC = docker-compose
+EXEC_API = $(DC) exec api
 
-# ---------- Python Tasks ----------
+# ---------- Local Tasks (Fast & Clean) ----------
 lint:
 	poetry run ruff check .
 
@@ -12,22 +14,29 @@ fix:
 	poetry run ruff check --fix .
 	poetry run ruff format .
 
-test:
-	poetry run pytest -v
-
-run-server:
-	poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
-
-# ---------- Docker Tasks ----------
+# ---------- Docker Tasks (Infrastructure) ----------
 build:
-	docker-compose build
+	$(DC) build
 
 up:
-	docker-compose up -d
+	$(DC) up -d
 
 down:
-	docker-compose down
+	$(DC) down
 
 logs:
-	docker-compose logs -f
+	$(DC) logs -f api nginx
+
+shell:
+	$(EXEC_API) /bin/bash
+
+# ---------- Database & Migrations ----------
+migration: # Usage: make migration m="add_users_table"
+	$(EXEC_API) alembic revision --autogenerate -m "$(m)"
+
+migrate:
+	$(EXEC_API) alembic upgrade head
+
+# ---------- Testing ----------
+test:
+	$(EXEC_API) pytest -v
