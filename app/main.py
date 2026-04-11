@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 import app.api.exc_handler as app_exc_handler
 from app.api.router import router
@@ -16,5 +17,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(lifespan=lifespan, title="TeleSentinel-Server")
-app.include_router(router, prefix="/api")
+
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=["*"])
+app.include_router(router)
 app_exc_handler.register_exc_handlers(app)

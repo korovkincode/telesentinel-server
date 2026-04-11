@@ -25,7 +25,7 @@ down:
 	$(DC) down
 
 logs:
-	$(DC) logs -f api
+	$(DC) logs -f api nginx
 
 shell:
 	$(EXEC_API) /bin/bash
