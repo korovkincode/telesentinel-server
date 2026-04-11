@@ -7,19 +7,8 @@ class Settings(BaseSettings):
     SUPERUSER_LOGIN: str
     SUPERUSER_PASSWORD: str
 
-    DB_USER: str
-    DB_PASSWORD: str
-    DB_HOST: str = "db"
-    DB_PORT: int = 5432
-    DB_NAME: str
-
-    @property
-    def DB_URL(self) -> str:
-        return (
-            "postgresql+asyncpg://"
-            f"{self.DB_USER}:{self.DB_PASSWORD}@"
-            f"{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
-        )
+    DB_URL: str
+    RABBITMQ_URL: str
 
     JWT_ALGORITHM: str
     SECRET_KEY: str
